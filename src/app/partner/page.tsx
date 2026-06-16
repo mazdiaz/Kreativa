@@ -1,7 +1,4 @@
-import Link from "next/link";
-import Image from "next/image";
-
-import { PageHeader } from "@/components/dashboard";
+import { PageHeader, ProductGrid } from "@/components/dashboard";
 import { requireRole } from "@/lib/authorization";
 import { getShowcaseProducts } from "@/lib/data";
 
@@ -18,19 +15,7 @@ export default async function PartnerDashboard() {
         title="Etalase Produk Peserta"
         description="Mitra dapat melihat produk peserta yang sudah dikurasi tanpa membuka data pribadi sensitif."
       />
-      <section className="grid grid-3">
-        {products.map((product) => (
-          <article className="card" key={product.id}>
-            <Image className="product-image" src={product.imageUrl} alt="" width={640} height={400} />
-            <span className="badge">{product.category}</span>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <Link className="button secondary" href={`/showcase/${product.id}`}>
-              Detail Produk
-            </Link>
-          </article>
-        ))}
-      </section>
+      <ProductGrid products={products} actionLabel="Detail Produk" />
     </>
   );
 }

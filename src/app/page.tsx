@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { StatGrid, WorkflowList } from "@/components/dashboard";
 import { getActivePrograms, getDashboardStats } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -10,14 +11,14 @@ export default async function HomePage() {
   return (
     <>
       <section className="hero">
-        <div>
+        <div className="hero-copy">
           <p className="eyebrow">Platform pelatihan inklusif</p>
           <h1>Model Pelatihan Vokasional dan Inkubasi Usaha Kreatif</h1>
           <p>
             Sistem berbasis potensi lokal untuk mengelola pendaftaran, asesmen, pelatihan, mentoring,
             inkubasi usaha, etalase produk, dan pelaporan bagi kelompok penyandang disabilitas.
           </p>
-          <div className="nav-links">
+          <div className="hero-actions">
             <Link className="button" href="/login">
               Masuk ke Sistem
             </Link>
@@ -26,7 +27,7 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="card">
+        <div className="hero-panel">
           <h2>Program Aktif</h2>
           <div className="grid">
             {programs.map((program) => (
@@ -39,15 +40,16 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-      <section className="grid grid-4" aria-label="Ringkasan platform">
-        {reports.map((item) => (
-          <article className="card" key={item.label}>
-            <div className="metric">{item.value}</div>
-            <h3>{item.label}</h3>
-            <p>{item.detail}</p>
-          </article>
-        ))}
-      </section>
+      <StatGrid items={reports} />
+      <div style={{ height: "1rem" }} />
+      <WorkflowList
+        items={[
+          { title: "Kelola program", detail: "Admin menyiapkan peserta, program, modul, jadwal, dan laporan." },
+          { title: "Ikuti pelatihan", detail: "Peserta daftar program, mengisi asesmen, dan memantau progres." },
+          { title: "Dampingi inkubasi", detail: "Mentor mencatat mentoring, absensi, progres, dan tindak lanjut." },
+          { title: "Tampilkan karya", detail: "Produk yang dikurasi tampil di etalase untuk mitra dan publik." },
+        ]}
+      />
     </>
   );
 }

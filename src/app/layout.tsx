@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { AppShell, PublicShell } from "@/components/app-shell";
 import { currentUser } from "@/lib/session";
-import { roleHome } from "@/lib/rbac";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,31 +11,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await currentUser();
-  const home = user ? roleHome(user.role) : null;
 
   return (
     <html lang="id">
-      <body>
-        <a className="skip-link button" href="#main">
-          Lewati ke konten utama
-        </a>
-        <header className="topbar">
-          <div className="topbar-inner">
-            <Link className="brand" href="/">
-              Inklusi Karya Nusantara
-            </Link>
-            <nav aria-label="Navigasi utama" className="nav-links">
-              <Link href="/showcase">Etalase</Link>
-              {home ? <a href={home.href}>{home.label}</a> : <Link href="/login">Login</Link>}
-              {user ? <a href="/notifications">Notifikasi</a> : null}
-              {user ? <a href="/logout">Keluar</a> : null}
-            </nav>
-          </div>
-        </header>
-        <main id="main" className="page">
-          {children}
-        </main>
-      </body>
+      <body>{user ? <AppShell user={user}>{children}</AppShell> : <PublicShell>{children}</PublicShell>}</body>
     </html>
   );
 }
