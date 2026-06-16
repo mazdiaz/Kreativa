@@ -2,14 +2,14 @@
 
 import { redirect } from "next/navigation";
 
-import { authenticateDemoUser } from "@/lib/auth-core";
+import { authenticateUser } from "@/lib/auth";
 import { dashboardPathForRole } from "@/lib/rbac";
 import { setSession } from "@/lib/session";
 
 export async function loginAction(formData: FormData) {
   const email = formData.get("email");
   const password = formData.get("password");
-  const user = authenticateDemoUser(email, password);
+  const user = await authenticateUser(email, password);
 
   if (!user) {
     redirect("/login?error=invalid");

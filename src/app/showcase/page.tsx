@@ -2,9 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { PageHeader } from "@/components/dashboard";
-import { products } from "@/lib/demo-data";
+import { getShowcaseProducts } from "@/lib/data";
 
-export default function ShowcasePage() {
+export const dynamic = "force-dynamic";
+
+export default async function ShowcasePage() {
+  const products = await getShowcaseProducts();
+
   return (
     <>
       <PageHeader

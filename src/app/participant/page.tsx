@@ -1,7 +1,13 @@
 import { ActionList, DataTable, PageHeader } from "@/components/dashboard";
-import { modules, schedules } from "@/lib/demo-data";
+import { requireRole } from "@/lib/authorization";
+import { getParticipantLearningData } from "@/lib/data";
 
-export default function ParticipantDashboard() {
+export const dynamic = "force-dynamic";
+
+export default async function ParticipantDashboard() {
+  const user = await requireRole(["PARTICIPANT"]);
+  const { modules, schedules } = await getParticipantLearningData(user.id);
+
   return (
     <>
       <PageHeader

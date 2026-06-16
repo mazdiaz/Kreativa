@@ -1,7 +1,13 @@
 import { DataTable, PageHeader } from "@/components/dashboard";
-import { participants } from "@/lib/demo-data";
+import { requireRole } from "@/lib/authorization";
+import { getAdminParticipants } from "@/lib/data";
 
-export default function AdminParticipantsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminParticipantsPage() {
+  await requireRole(["ADMIN"]);
+  const participants = await getAdminParticipants();
+
   return (
     <>
       <PageHeader

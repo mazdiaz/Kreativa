@@ -1,7 +1,13 @@
 import { ActionList, DataTable, PageHeader, StatGrid } from "@/components/dashboard";
-import { participants, programs, reports } from "@/lib/demo-data";
+import { requireRole } from "@/lib/authorization";
+import { getActivePrograms, getAdminParticipants, getDashboardStats } from "@/lib/data";
 
-export default function AdminDashboard() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminDashboard() {
+  await requireRole(["ADMIN"]);
+  const [participants, programs, reports] = await Promise.all([getAdminParticipants(), getActivePrograms(), getDashboardStats()]);
+
   return (
     <>
       <PageHeader

@@ -2,9 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { PageHeader } from "@/components/dashboard";
-import { products } from "@/lib/demo-data";
+import { requireRole } from "@/lib/authorization";
+import { getShowcaseProducts } from "@/lib/data";
 
-export default function PartnerDashboard() {
+export const dynamic = "force-dynamic";
+
+export default async function PartnerDashboard() {
+  await requireRole(["PARTNER"]);
+  const products = await getShowcaseProducts();
+
   return (
     <>
       <PageHeader

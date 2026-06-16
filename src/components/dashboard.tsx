@@ -48,9 +48,11 @@ export function ActionList({ items }: { items: Array<{ href: string; label: stri
 export function DataTable({
   headers,
   rows,
+  emptyMessage = "Belum ada data.",
 }: {
   headers: string[];
   rows: Array<Array<string | number | React.ReactNode>>;
+  emptyMessage?: string;
 }) {
   return (
     <div className="table-wrap card">
@@ -65,13 +67,19 @@ export function DataTable({
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
-            <tr key={index}>
-              {row.map((cell, cellIndex) => (
-                <td key={cellIndex}>{cell}</td>
-              ))}
+          {rows.length ? (
+            rows.map((row, index) => (
+              <tr key={index}>
+                {row.map((cell, cellIndex) => (
+                  <td key={cellIndex}>{cell}</td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={headers.length}>{emptyMessage}</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

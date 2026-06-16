@@ -1,8 +1,12 @@
 import Link from "next/link";
 
-import { programs, reports } from "@/lib/demo-data";
+import { getActivePrograms, getDashboardStats } from "@/lib/data";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const [programs, reports] = await Promise.all([getActivePrograms(), getDashboardStats()]);
+
   return (
     <>
       <section className="hero">

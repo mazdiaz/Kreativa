@@ -1,7 +1,13 @@
 import { DataTable, PageHeader, StatGrid } from "@/components/dashboard";
-import { businessIdeas, products, reports } from "@/lib/demo-data";
+import { requireRole } from "@/lib/authorization";
+import { getAdminReportsData } from "@/lib/data";
 
-export default function AdminReportsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminReportsPage() {
+  await requireRole(["ADMIN"]);
+  const { businessIdeas, products, stats } = await getAdminReportsData();
+
   return (
     <>
       <PageHeader
@@ -9,7 +15,7 @@ export default function AdminReportsPage() {
         title="Laporan Program"
         description="Ringkasan dampak awal untuk kebutuhan monitoring internal dan laporan sponsor."
       />
-      <StatGrid items={reports} />
+      <StatGrid items={stats} />
       <h2>Ide Usaha</h2>
       <DataTable headers={["Judul", "Peserta", "Potensi Lokal", "Status"]} rows={businessIdeas.map((item) => [item.title, item.participant, item.localPotential, item.status])} />
       <h2>Produk Etalase</h2>

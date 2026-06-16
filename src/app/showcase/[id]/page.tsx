@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { products } from "@/lib/demo-data";
+import { getShowcaseProduct } from "@/lib/data";
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const product = products.find((item) => item.id === id);
+  const product = await getShowcaseProduct(id);
   if (!product) notFound();
 
   return (

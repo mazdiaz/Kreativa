@@ -5,10 +5,10 @@ import { SESSION_COOKIE, safeSessionFromCookie } from "./lib/session-types";
 
 const PROTECTED_PREFIXES = ["/admin", "/participant", "/mentor", "/partner"];
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const rawSession = request.cookies.get(SESSION_COOKIE)?.value;
-  const user = safeSessionFromCookie(rawSession);
+  const user = await safeSessionFromCookie(rawSession);
 
   if (pathname === "/login" && user) {
     return NextResponse.redirect(new URL(dashboardPathForRole(user.role), request.url));

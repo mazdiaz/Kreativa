@@ -1,7 +1,13 @@
 import { ActionList, DataTable, PageHeader } from "@/components/dashboard";
-import { mentoringSessions, messages, participants } from "@/lib/demo-data";
+import { requireRole } from "@/lib/authorization";
+import { getMentorDashboardData } from "@/lib/data";
 
-export default function MentorDashboard() {
+export const dynamic = "force-dynamic";
+
+export default async function MentorDashboard() {
+  const user = await requireRole(["MENTOR"]);
+  const { messages, participants, sessions } = await getMentorDashboardData(user.id);
+
   return (
     <>
       <PageHeader
@@ -19,7 +25,7 @@ export default function MentorDashboard() {
       <h2>Peserta Bimbingan</h2>
       <DataTable headers={["Nama", "Program", "Progres", "Kebutuhan"]} rows={participants.map((item) => [item.name, item.program, `${item.progress}%`, item.disabilityNeed])} />
       <h2>Sesi Terbaru</h2>
-      <DataTable headers={["Peserta", "Topik", "Tindak Lanjut", "Tanggal"]} rows={mentoringSessions.map((item) => [item.participant, item.topic, item.nextAction, item.date])} />
+      <DataTable headers={["Peserta", "Topik", "Tindak Lanjut", "Tanggal"]} rows={sessions.map((item) => [item.participant, item.topic, item.nextAction, item.date])} />
       <h2>Inbox</h2>
       <DataTable headers={["Dari", "Subjek", "Status"]} rows={messages.map((item) => [item.sender, item.subject, item.read ? "Sudah dibaca" : "Belum dibaca"])} />
     </>
