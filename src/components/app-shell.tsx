@@ -17,6 +17,7 @@ import {
   Lightbulb,
   LogOut,
   PackageCheck,
+  RefreshCw,
   ShieldCheck,
   ShoppingBag,
   Store,
@@ -164,8 +165,13 @@ export function AppShell({ children, user }: { children: ReactNode; user: Sessio
           <div>
             <p className="topbar-kicker">{roleLabels[user.role]}</p>
             <h2>{pageLabel}</h2>
+            <span className="sync-status">Updated just now</span>
           </div>
           <div className="topbar-actions">
+            <button className="button secondary compact ghost-action" type="button" aria-label="Status sinkronisasi visual">
+              <RefreshCw aria-hidden="true" size={15} />
+              Reload
+            </button>
             <a className="icon-button" href="/notifications" aria-label="Buka notifikasi">
               <Bell aria-hidden="true" size={18} />
             </a>

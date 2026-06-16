@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { ArrowRight, BarChart3, ClipboardList, Inbox, type LucideIcon } from "lucide-react";
+import { ArrowRight, BarChart3, ClipboardList, Inbox, Sparkles, type LucideIcon } from "lucide-react";
 
 export function PageHeader({
   eyebrow,
@@ -24,12 +24,15 @@ export function StatGrid({ items }: { items: Array<{ label: string; value: strin
     <section className="grid grid-4" aria-label="Metrik utama">
       {items.map((item) => (
         <article className="metric-card" key={item.label}>
-          <div className="metric-icon">
-            <BarChart3 aria-hidden="true" size={20} />
+          <div className="metric-card-head">
+            <h3>{item.label}</h3>
+            <span className="metric-icon">
+              <BarChart3 aria-hidden="true" size={16} />
+            </span>
           </div>
           <div className="metric">{item.value}</div>
-          <h3>{item.label}</h3>
           <p>{item.detail}</p>
+          <span className="trend-pill">Aktif</span>
         </article>
       ))}
     </section>
@@ -78,6 +81,54 @@ export function WorkflowList({ items }: { items: Array<{ title: string; detail: 
         ))}
       </ol>
     </section>
+  );
+}
+
+export function InsightBanner({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
+  return (
+    <section className="insight-banner">
+      <Sparkles aria-hidden="true" size={18} />
+      <div>
+        <strong>{title}</strong>
+        <p>{description}</p>
+      </div>
+    </section>
+  );
+}
+
+export function MiniBarChart({ values }: { values: number[] }) {
+  const max = Math.max(...values, 1);
+  return (
+    <div className="mini-chart" aria-label="Visual ringkas progres">
+      {values.map((value, index) => (
+        <span
+          className={index === values.length - 2 ? "active" : undefined}
+          key={`${value}-${index}`}
+          style={{ height: `${Math.max(18, (value / max) * 100)}%` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+export function SummaryPanel({
+  children,
+  title,
+}: {
+  children: React.ReactNode;
+  title: string;
+}) {
+  return (
+    <aside className="summary-panel">
+      <h2>{title}</h2>
+      {children}
+    </aside>
   );
 }
 
