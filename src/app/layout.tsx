@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </Link>
             <nav aria-label="Navigasi utama" className="nav-links">
               <Link href="/showcase">Etalase</Link>
-              {home ? <Link href={home.href}>{home.label}</Link> : <Link href="/login">Login</Link>}
+              {home ? <Link href={home.href} prefetch={false}>{home.label}</Link> : <Link href="/login">Login</Link>}
               {user ? <Link href="/logout">Keluar</Link> : null}
             </nav>
           </div>

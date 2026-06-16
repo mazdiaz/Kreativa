@@ -36,7 +36,7 @@ export function ActionList({ items }: { items: Array<{ href: string; label: stri
   return (
     <section className="grid grid-3" aria-label="Aksi utama">
       {items.map((item) => (
-        <Link className="card" href={item.href} key={item.href}>
+        <Link className="card" href={item.href} key={item.href} prefetch={false}>
           <h3>{item.label}</h3>
           <p>{item.description}</p>
         </Link>
