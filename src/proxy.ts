@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { proxyDecision } from "./lib/proxy-policy";
-import { SESSION_COOKIE } from "./lib/session-types";
+
+const SESSION_COOKIE = "inklusikarya_session";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
