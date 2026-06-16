@@ -30,3 +30,11 @@ export function canAccessRoleArea(role, pathname) {
   const allowedPrefixes = ROLE_AREAS[role] ?? [];
   return allowedPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 }
+
+export function safePostLoginRedirect(role, nextPath) {
+  const fallback = dashboardPathForRole(role);
+  if (!nextPath || typeof nextPath !== "string") return fallback;
+  if (!nextPath.startsWith("/") || nextPath.startsWith("//")) return fallback;
+  if (nextPath.startsWith("/login") || nextPath.startsWith("/logout")) return fallback;
+  return canAccessRoleArea(role, nextPath) ? nextPath : fallback;
+}

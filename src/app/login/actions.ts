@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 
 import { authenticateUser } from "@/lib/auth";
-import { dashboardPathForRole } from "@/lib/rbac";
+import { safePostLoginRedirect } from "@/lib/rbac";
 import { setSession } from "@/lib/session";
 
 export async function loginAction(formData: FormData) {
@@ -16,5 +16,5 @@ export async function loginAction(formData: FormData) {
   }
 
   await setSession(user);
-  redirect(dashboardPathForRole(user.role));
+  redirect(safePostLoginRedirect(user.role, String(formData.get("next") ?? "")));
 }

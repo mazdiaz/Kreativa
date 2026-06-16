@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   canAccessRoleArea,
   dashboardPathForRole,
+  safePostLoginRedirect,
   roleHome,
 } from "./rbac.js";
 
@@ -28,4 +29,11 @@ test("exposes public role home metadata for navigation", () => {
     label: "Portal Mentor",
     href: "/mentor",
   });
+});
+
+test("chooses a safe post-login redirect for the current role", () => {
+  assert.equal(safePostLoginRedirect("ADMIN", "/admin/programs"), "/admin/programs");
+  assert.equal(safePostLoginRedirect("ADMIN", "/participant/progress"), "/admin");
+  assert.equal(safePostLoginRedirect("ADMIN", "https://evil.example/admin"), "/admin");
+  assert.equal(safePostLoginRedirect("PARTICIPANT", undefined), "/participant");
 });

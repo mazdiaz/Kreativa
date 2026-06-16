@@ -1,11 +1,20 @@
 import { loginAction } from "./actions";
+import { redirect } from "next/navigation";
+
+import { safePostLoginRedirect } from "@/lib/rbac";
+import { currentUser } from "@/lib/session";
 
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; next?: string }>;
 }) {
   const params = await searchParams;
+  const user = await currentUser();
+  if (user) {
+    redirect(safePostLoginRedirect(user.role, params.next));
+  }
+
   return (
     <section className="grid grid-2">
       <div>
@@ -26,6 +35,7 @@ export default async function LoginPage({
       <form className="card form-stack" action={loginAction}>
         <h2>Login</h2>
         {params.error ? <div className="alert">Email atau password tidak valid.</div> : null}
+        {params.next ? <input type="hidden" name="next" value={params.next} /> : null}
         <div>
           <label htmlFor="email">Email</label>
           <input id="email" name="email" type="email" required autoComplete="email" />
