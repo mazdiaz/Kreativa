@@ -6,6 +6,7 @@ import { proxyDecision } from "./proxy-policy.js";
 test("proxy sends protected routes without a session cookie to login", () => {
   assert.deepEqual(proxyDecision("/admin", false), { type: "login" });
   assert.deepEqual(proxyDecision("/participant/progress", false), { type: "login" });
+  assert.deepEqual(proxyDecision("/notifications", false), { type: "login" });
 });
 
 test("proxy allows protected routes when a session cookie exists and leaves role validation to server pages", () => {

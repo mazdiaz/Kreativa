@@ -80,7 +80,19 @@ npx prisma migrate dev --name init
 npx prisma db seed
 ```
 
-Untuk perubahan schema berikutnya, jalankan migration dari mesin lokal/CI yang punya `DIRECT_URL`, commit folder `prisma/migrations`, lalu deploy Vercel.
+Untuk perubahan schema yang sudah dicommit, jalankan migration ke Neon production sebelum atau sesudah deploy kode:
+
+```powershell
+$env:DATABASE_URL = "<Neon pooled connection string>"
+$env:DIRECT_URL = "<Neon direct/unpooled connection string>"
+npx prisma migrate deploy
+```
+
+Jika database baru dibuat dari kosong, jalankan seed setelah migration:
+
+```powershell
+npx prisma db seed
+```
 
 ## Status MVP
 
@@ -91,13 +103,16 @@ Yang sudah ada:
 - Signed session cookie berbasis `AUTH_SECRET`.
 - RBAC route protection untuk Admin, Peserta, Mentor, Mitra.
 - Dashboard dan halaman role utama membaca data Neon.
-- CRUD program dasar, tambah modul, tambah jadwal.
-- Submit asesmen, ide usaha, dan catatan mentoring ke Neon.
+- Admin: kelola peserta, validasi pendaftaran, kelola user/role, program, modul, jadwal, kurasi produk, inbox, laporan CSV, dan backup JSON.
+- Peserta: daftar program, isi asesmen, lihat jadwal/progres, ajukan ide usaha, ajukan produk, dan inbox.
+- Mentor: lihat peserta, catat mentoring, catat absensi, update progres modul, dan inbox.
+- Mitra/public: melihat etalase produk published dan detail produk.
+- Notifikasi: status pendaftaran, produk, pesan, absensi, dan progres masuk ke pusat notifikasi user.
 - Prisma schema untuk model data TOGAF/RPL.
 - Seed demo untuk database saat Neon tersedia.
 - Unit test untuk auth, credential, validasi form, dan RBAC.
 
-Yang belum disambungkan penuh:
+Catatan scope:
 
 - Upload gambar memakai URL demo; Vercel Blob disiapkan sebagai dependency tetapi belum dipakai di form upload.
-- Export laporan PDF belum dibuat.
+- Export laporan tersedia sebagai CSV. Export PDF dapat ditambahkan setelah format laporan final ditentukan.

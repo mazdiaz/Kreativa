@@ -28,6 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <nav aria-label="Navigasi utama" className="nav-links">
               <Link href="/showcase">Etalase</Link>
               {home ? <a href={home.href}>{home.label}</a> : <Link href="/login">Login</Link>}
+              {user ? <a href="/notifications">Notifikasi</a> : null}
               {user ? <a href="/logout">Keluar</a> : null}
             </nav>
           </div>

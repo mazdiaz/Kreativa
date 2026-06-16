@@ -15,6 +15,9 @@ export default async function AdminReportsPage() {
         title="Laporan Program"
         description="Ringkasan dampak awal untuk kebutuhan monitoring internal dan laporan sponsor."
       />
+      <p>
+        <a className="button secondary" href="/admin/reports/export">Unduh CSV Laporan</a>
+      </p>
       <StatGrid items={stats} />
       <h2>Ide Usaha</h2>
       <DataTable headers={["Judul", "Peserta", "Potensi Lokal", "Status"]} rows={businessIdeas.map((item) => [item.title, item.participant, item.localPotential, item.status])} />

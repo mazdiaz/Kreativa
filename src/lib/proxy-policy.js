@@ -1,4 +1,4 @@
-const PROTECTED_PREFIXES = ["/admin", "/participant", "/mentor", "/partner"];
+const PROTECTED_PREFIXES = ["/admin", "/participant", "/mentor", "/partner", "/notifications"];
 
 export function isProtectedPath(pathname) {
   return PROTECTED_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));

@@ -19,6 +19,7 @@ export default async function MentorDashboard() {
         items={[
           { href: "/mentor/participants", label: "Peserta Bimbingan", description: "Lihat progres dan kebutuhan pendampingan." },
           { href: "/mentor/sessions", label: "Catatan Mentoring", description: "Dokumentasikan sesi, catatan, dan tindak lanjut." },
+          { href: "/mentor/attendance", label: "Absensi & Progres", description: "Catat kehadiran dan perkembangan modul peserta." },
           { href: "/mentor/inbox", label: "Inbox", description: "Kelola pesan peserta tanpa chat realtime." },
         ]}
       />

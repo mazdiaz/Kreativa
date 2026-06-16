@@ -168,6 +168,15 @@ button {
   color: var(--ink);
 }
 
+.secondary-button {
+  background: #e8eef5;
+  color: var(--ink);
+}
+
+.danger {
+  background: #a32626;
+}
+
 .button:hover,
 .button:focus,
 button:hover,
@@ -200,6 +209,41 @@ textarea {
 .form-stack {
   display: grid;
   gap: 1rem;
+}
+
+.inline-form,
+.inline-actions {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.inline-form label,
+.inline-actions label {
+  margin-bottom: 0;
+  min-width: 12rem;
+}
+
+.checkbox-row {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+}
+
+.checkbox-row input {
+  min-height: auto;
+  width: auto;
+}
+
+details {
+  max-width: 34rem;
+}
+
+summary {
+  color: var(--brand);
+  cursor: pointer;
+  font-weight: 700;
 }
 
 .alert {

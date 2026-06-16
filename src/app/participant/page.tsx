@@ -17,9 +17,12 @@ export default async function ParticipantDashboard() {
       />
       <ActionList
         items={[
+          { href: "/participant/programs", label: "Daftar Program", description: "Ajukan pendaftaran program vokasional atau inkubasi yang tersedia." },
           { href: "/participant/assessment", label: "Isi Asesmen", description: "Lengkapi asesmen awal untuk rekomendasi jalur pelatihan." },
           { href: "/participant/progress", label: "Lihat Progres", description: "Pantau modul, jadwal, dan perkembangan pelatihan." },
           { href: "/participant/business-ideas", label: "Ajukan Ide Usaha", description: "Dokumentasikan ide usaha dan status review inkubasi." },
+          { href: "/participant/products", label: "Produk Saya", description: "Ajukan produk untuk kurasi admin dan etalase mitra." },
+          { href: "/participant/inbox", label: "Inbox", description: "Kirim pesan tindak lanjut ke mentor atau admin." },
         ]}
       />
       <h2>Modul Saya</h2>

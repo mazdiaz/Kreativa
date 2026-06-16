@@ -21,7 +21,11 @@ export default async function AdminDashboard() {
         items={[
           { href: "/admin/participants", label: "Kelola Peserta", description: "Lihat profil, status program, dan kebutuhan aksesibilitas peserta." },
           { href: "/admin/programs", label: "Kelola Program", description: "Atur program vokasional, inkubasi, modul, dan jadwal." },
+          { href: "/admin/users", label: "User & Role", description: "Atur akun admin, peserta, mentor, mitra, dan status akses." },
+          { href: "/admin/products", label: "Kurasi Produk", description: "Validasi produk peserta sebelum tampil di etalase." },
+          { href: "/admin/inbox", label: "Inbox Admin", description: "Baca pesan dari peserta dan mentor serta kirim tindak lanjut." },
           { href: "/admin/reports", label: "Laporan", description: "Pantau progres, produk etalase, dan sesi mentoring." },
+          { href: "/admin/backup", label: "Backup Data", description: "Unduh snapshot data operasional untuk pemulihan manual." },
         ]}
       />
       <div style={{ height: "1.5rem" }} />

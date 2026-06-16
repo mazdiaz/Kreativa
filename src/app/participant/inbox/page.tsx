@@ -5,13 +5,17 @@ import { getInboxData } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
-export default async function MentorInboxPage() {
-  const user = await requireRole(["MENTOR"]);
+export default async function ParticipantInboxPage() {
+  const user = await requireRole(["PARTICIPANT"]);
   const { messages, recipients } = await getInboxData(user.id);
 
   return (
     <>
-      <PageHeader eyebrow="Mentor" title="Inbox Sederhana" description="Komunikasi peserta-mentor dibuat tanpa realtime server untuk menjaga MVP tetap ringan." />
+      <PageHeader
+        eyebrow="Peserta"
+        title="Inbox"
+        description="Kirim dan baca pesan tindak lanjut dengan mentor atau admin program."
+      />
       <h2>Kirim Pesan</h2>
       <form className="card form-stack" action={sendMessageAction}>
         <label>
