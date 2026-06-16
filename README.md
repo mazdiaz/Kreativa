@@ -1,6 +1,8 @@
-# Inklusi Karya Nusantara Website
+# Kreativa
 
-MVP Next.js untuk platform pelatihan vokasional dan inkubasi usaha kreatif berbasis potensi lokal bagi kelompok penyandang disabilitas.
+Website berbasis Pelatihan Vokasional dan Inkubasi Usaha Kreatif Berbasis Potensi Lokal bagi Kelompok Penyandang Disabilitas.
+
+MVP ini menggunakan Next.js untuk target deploy Vercel, dengan Prisma sebagai ORM dan Neon Postgres sebagai target database production.
 
 ## Stack
 
@@ -12,7 +14,7 @@ MVP Next.js untuk platform pelatihan vokasional dan inkubasi usaha kreatif berba
 
 ## Jalankan Lokal
 
-Pastikan Node.js dan npm tersedia. Pada mesin ini, jika `node` belum masuk PATH, pakai:
+Pastikan Node.js dan npm tersedia. Jika `node` belum masuk PATH pada PowerShell, pakai:
 
 ```powershell
 $env:Path = "C:\Program Files\nodejs;" + $env:Path
