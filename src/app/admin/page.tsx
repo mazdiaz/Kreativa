@@ -30,7 +30,7 @@ export default async function AdminDashboard() {
           <section>
             <div className="dashboard-section-title">
               <h2>Peserta Terbaru</h2>
-              <span className="badge">Live Data</span>
+              <span className="badge">Data Aktif</span>
             </div>
             <DataTable
               headers={["Nama", "Program", "Kebutuhan", "Progres", "Status"]}
@@ -79,7 +79,7 @@ export default async function AdminDashboard() {
               { title: "Siapkan peserta", detail: "Tambah peserta dan validasi kebutuhan aksesibilitas." },
               { title: "Kelola program", detail: "Buat program, modul, jadwal, dan periode pelatihan." },
               { title: "Validasi & kurasi", detail: "Setujui pendaftaran dan produk sebelum tampil publik." },
-              { title: "Pantau laporan", detail: "Unduh CSV atau backup JSON untuk arsip sidang/demo." },
+              { title: "Pantau laporan", detail: "Unduh CSV atau backup JSON untuk arsip operasional." },
             ]}
           />
           <SummaryPanel title="Program Aktif">

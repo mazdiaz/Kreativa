@@ -47,7 +47,7 @@ export default async function AdminUsersPage() {
             </select>
           </label>
         </div>
-        <p>Password awal akun baru adalah <strong>password123</strong>.</p>
+        <p className="form-note">Kredensial awal akun dikelola oleh administrator program.</p>
         <button type="submit">Simpan User</button>
       </form>
       <h2>Daftar User</h2>

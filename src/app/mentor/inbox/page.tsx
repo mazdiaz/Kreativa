@@ -11,7 +11,7 @@ export default async function MentorInboxPage() {
 
   return (
     <>
-      <PageHeader eyebrow="Mentor" title="Inbox Sederhana" description="Komunikasi peserta-mentor dibuat tanpa realtime server untuk menjaga MVP tetap ringan." />
+      <PageHeader eyebrow="Mentor" title="Inbox" description="Kelola komunikasi dan tindak lanjut dengan peserta maupun admin program." />
       <h2>Kirim Pesan</h2>
       <form className="card form-stack" action={sendMessageAction}>
         <label>

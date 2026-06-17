@@ -34,7 +34,7 @@ export async function createUserAction(formData: FormData) {
   });
 
   await writeAuditLog(actor.id, "CREATE_USER", `User:${user.id}`, { role: input.role });
-  await notifyUser(user.id, "Akun pengguna dibuat", "Admin telah membuat akun untuk Anda. Password awal: password123.");
+  await notifyUser(user.id, "Akun pengguna dibuat", "Admin telah membuat akun untuk Anda.");
   revalidatePath("/admin/users");
 }
 

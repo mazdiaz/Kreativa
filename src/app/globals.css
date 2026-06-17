@@ -661,6 +661,13 @@ textarea {
   gap: 1rem;
 }
 
+.form-note,
+.login-help {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
 .form-panel > .form-stack,
 .card.form-stack {
   padding: 1rem;
@@ -909,29 +916,61 @@ tr:last-child td {
   font-weight: 800;
 }
 
+.login-layout {
+  align-items: stretch;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 460px);
+  margin: 1.5rem auto 0;
+  max-width: 1040px;
+}
+
+.login-intro-panel,
 .login-card {
-  align-self: start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   box-shadow: var(--shadow);
 }
 
-.demo-account-grid {
-  display: grid;
-  gap: 0.7rem;
+.login-intro-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 560px;
+  padding: 1.5rem;
 }
 
-.demo-account {
+.login-card {
+  align-content: center;
+  align-self: stretch;
+  padding: 1.5rem;
+}
+
+.login-card h2,
+.login-card p {
+  margin-bottom: 0;
+}
+
+.access-role-grid {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.access-role-card {
   background: var(--surface-soft);
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 0.75rem;
+  padding: 0.8rem;
 }
 
-.demo-account strong,
-.demo-account span {
+.access-role-card strong,
+.access-role-card span {
   display: block;
 }
 
-.demo-account span {
+.access-role-card span {
   color: var(--muted);
   margin-top: 0.15rem;
 }
@@ -982,6 +1021,7 @@ tr:last-child td {
   }
 
   .hero,
+  .login-layout,
   .grid-2,
   .grid-3,
   .grid-4,
@@ -1006,5 +1046,9 @@ tr:last-child td {
 
   .user-chip {
     justify-content: flex-start;
+  }
+
+  .login-intro-panel {
+    min-height: auto;
   }
 }

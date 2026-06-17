@@ -51,7 +51,7 @@ export default async function AdminParticipantsPage() {
           <input name="consentStatus" type="checkbox" />
           Peserta menyetujui penggunaan data untuk kebutuhan program
         </label>
-        <p>Password awal peserta baru adalah <strong>password123</strong>.</p>
+        <p className="form-note">Kredensial awal peserta dikelola oleh administrator program.</p>
         <button type="submit">Simpan Peserta</button>
       </form>
       <h2>Daftar Peserta</h2>

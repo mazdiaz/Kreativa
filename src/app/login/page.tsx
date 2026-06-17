@@ -16,36 +16,40 @@ export default async function LoginPage({
   }
 
   return (
-    <section className="grid grid-2">
-      <div className="hero-copy">
-        <p className="eyebrow">Akses demo MVP</p>
-        <h1>Masuk ke Platform</h1>
+    <section className="login-layout">
+      <div className="login-intro-panel">
+        <p className="eyebrow">Akses platform</p>
+        <h1>Masuk ke Inklusi Karya Nusantara</h1>
         <p>
-          Gunakan akun demo sesuai role untuk mencoba alur Admin, Peserta, Mentor, dan Mitra.
-          Password semua akun demo adalah <strong>password123</strong>.
+          Gunakan akun yang telah diberikan oleh administrator untuk mengakses ruang kerja sesuai peran Anda.
+          Setiap akun hanya dapat membuka modul yang sesuai dengan hak aksesnya.
         </p>
-        <div className="card demo-account-grid">
-          <h2>Akun Demo</h2>
-          <div className="demo-account">
+        <div className="access-role-grid">
+          <h2>Area Akses</h2>
+          <div className="access-role-card">
             <strong>Admin</strong>
-            <span>admin@inklusikarya.test</span>
+            <span>Kelola peserta, program, user, produk, laporan, dan backup data.</span>
           </div>
-          <div className="demo-account">
+          <div className="access-role-card">
             <strong>Peserta</strong>
-            <span>peserta@inklusikarya.test</span>
+            <span>Daftar program, isi asesmen, pantau progres, dan ajukan karya.</span>
           </div>
-          <div className="demo-account">
+          <div className="access-role-card">
             <strong>Mentor</strong>
-            <span>mentor@inklusikarya.test</span>
+            <span>Catat mentoring, absensi, progres modul, dan tindak lanjut peserta.</span>
           </div>
-          <div className="demo-account">
+          <div className="access-role-card">
             <strong>Mitra</strong>
-            <span>mitra@inklusikarya.test</span>
+            <span>Lihat etalase produk peserta yang sudah dikurasi.</span>
           </div>
         </div>
       </div>
-      <form className="card form-stack login-card" action={loginAction}>
-        <h2>Login</h2>
+      <form className="login-card form-stack" action={loginAction}>
+        <div>
+          <p className="eyebrow">Autentikasi</p>
+          <h2>Masuk</h2>
+          <p>Masukkan email dan kata sandi akun Anda.</p>
+        </div>
         {params.error ? <div className="alert">Email atau password tidak valid.</div> : null}
         {params.next ? <input type="hidden" name="next" value={params.next} /> : null}
         <div>
@@ -57,6 +61,7 @@ export default async function LoginPage({
           <input id="password" name="password" type="password" required autoComplete="current-password" />
         </div>
         <button type="submit">Masuk ke Dashboard</button>
+        <p className="login-help">Belum memiliki akses? Hubungi administrator program.</p>
       </form>
     </section>
   );

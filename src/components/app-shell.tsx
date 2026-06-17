@@ -165,12 +165,12 @@ export function AppShell({ children, user }: { children: ReactNode; user: Sessio
           <div>
             <p className="topbar-kicker">{roleLabels[user.role]}</p>
             <h2>{pageLabel}</h2>
-            <span className="sync-status">Updated just now</span>
+            <span className="sync-status">Data tersinkron</span>
           </div>
           <div className="topbar-actions">
-            <button className="button secondary compact ghost-action" type="button" aria-label="Status sinkronisasi visual">
+            <button className="button secondary compact ghost-action" type="button" onClick={() => window.location.reload()} aria-label="Muat ulang halaman">
               <RefreshCw aria-hidden="true" size={15} />
-              Reload
+              Muat ulang
             </button>
             <a className="icon-button" href="/notifications" aria-label="Buka notifikasi">
               <Bell aria-hidden="true" size={18} />

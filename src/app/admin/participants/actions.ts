@@ -43,7 +43,7 @@ export async function createParticipantAction(formData: FormData) {
   });
 
   await writeAuditLog(actor.id, "CREATE_PARTICIPANT", `User:${participantUser.id}`, { email: input.email });
-  await notifyUser(participantUser.id, "Akun peserta dibuat", "Admin telah membuat akun peserta. Password awal: password123.");
+  await notifyUser(participantUser.id, "Akun peserta dibuat", "Admin telah membuat akun peserta untuk mengakses platform.");
   revalidatePath("/admin");
   revalidatePath("/admin/participants");
 }
