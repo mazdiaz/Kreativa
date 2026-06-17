@@ -29,7 +29,7 @@ export async function GET() {
   return new NextResponse(rows.join("\n"), {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="laporan-inklusi-karya.csv"`,
+      "Content-Disposition": `attachment; filename="laporan-kreativa.csv"`,
     },
   });
 }

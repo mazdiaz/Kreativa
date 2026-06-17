@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { proxyDecision } from "./lib/proxy-policy";
 
-const SESSION_COOKIE = "inklusikarya_session";
+const SESSION_COOKIE = "kreativa_session";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;

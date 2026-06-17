@@ -4,10 +4,10 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const accounts = [
-  ["Admin Program", "admin@inklusikarya.test", "ADMIN"],
-  ["Siti Rahma", "peserta@inklusikarya.test", "PARTICIPANT"],
-  ["Budi Mentor", "mentor@inklusikarya.test", "MENTOR"],
-  ["Mitra Nusantara", "mitra@inklusikarya.test", "PARTNER"],
+  ["Admin Program", "admin@kreativa.test", "ADMIN"],
+  ["Siti Rahma", "peserta@kreativa.test", "PARTICIPANT"],
+  ["Budi Mentor", "mentor@kreativa.test", "MENTOR"],
+  ["Mitra Kreativa", "mitra@kreativa.test", "PARTNER"],
 ];
 
 async function main() {
@@ -20,7 +20,7 @@ async function main() {
     });
   }
 
-  const participantUser = await prisma.user.findUniqueOrThrow({ where: { email: "peserta@inklusikarya.test" } });
+  const participantUser = await prisma.user.findUniqueOrThrow({ where: { email: "peserta@kreativa.test" } });
   const participant = await prisma.participantProfile.upsert({
     where: { userId: participantUser.id },
     update: {},
@@ -34,10 +34,10 @@ async function main() {
   });
 
   const program = await prisma.program.upsert({
-    where: { id: "demo-program-kriya" },
+    where: { id: "program-kriya-kreativa" },
     update: {},
     create: {
-      id: "demo-program-kriya",
+      id: "program-kriya-kreativa",
       name: "Pelatihan Kriya Kreatif Berbasis Potensi Lokal",
       type: "Vokasional",
       description: "Program pengembangan keterampilan kriya, pengemasan, dan pemasaran produk.",

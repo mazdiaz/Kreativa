@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { normalizeEmail, verifyCredentialUser } from "./credentials.js";
 
 test("normalizes credential email before lookup", () => {
-  assert.equal(normalizeEmail("  Admin@InklusiKarya.Test "), "admin@inklusikarya.test");
+  assert.equal(normalizeEmail("  Admin@Kreativa.Test "), "admin@kreativa.test");
 });
 
 test("verifies active credential users with bcrypt and rejects inactive or invalid users", async () => {
@@ -13,7 +13,7 @@ test("verifies active credential users with bcrypt and rejects inactive or inval
   const activeUser = {
     id: "u-admin",
     name: "Admin",
-    email: "admin@inklusikarya.test",
+    email: "admin@kreativa.test",
     role: "ADMIN",
     status: "ACTIVE",
     passwordHash,

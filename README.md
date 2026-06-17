@@ -2,7 +2,7 @@
 
 Website berbasis Pelatihan Vokasional dan Inkubasi Usaha Kreatif Berbasis Potensi Lokal bagi Kelompok Penyandang Disabilitas.
 
-MVP ini menggunakan Next.js untuk target deploy Vercel, dengan Prisma sebagai ORM dan Neon Postgres sebagai target database production.
+Aplikasi ini menggunakan Next.js untuk target deploy Vercel, dengan Prisma sebagai ORM dan Neon Postgres sebagai target database production.
 
 ## Stack
 
@@ -29,7 +29,7 @@ npm install
 Untuk build tanpa database cloud, gunakan env dummy agar Prisma generate bisa berjalan:
 
 ```powershell
-$env:DATABASE_URL = "postgresql://user:password@localhost:5432/inklusikarya?schema=public"
+$env:DATABASE_URL = "postgresql://user:password@localhost:5432/kreativa?schema=public"
 $env:DIRECT_URL = $env:DATABASE_URL
 $env:AUTH_SECRET = "local-development-secret"
 npm run build
@@ -44,7 +44,7 @@ $env:AUTH_SECRET = "local-development-secret"
 npm run dev
 ```
 
-## Akun Demo
+## Akun Awal
 
 Seed database membuat akun awal berikut. Semua akun memakai password:
 
@@ -54,10 +54,10 @@ password123
 
 | Role | Email |
 |---|---|
-| Admin | admin@inklusikarya.test |
-| Peserta | peserta@inklusikarya.test |
-| Mentor | mentor@inklusikarya.test |
-| Mitra | mitra@inklusikarya.test |
+| Admin | admin@kreativa.test |
+| Peserta | peserta@kreativa.test |
+| Mentor | mentor@kreativa.test |
+| Mitra | mitra@kreativa.test |
 
 ## Environment Vercel
 
@@ -94,7 +94,7 @@ Jika database baru dibuat dari kosong, jalankan seed setelah migration:
 npx prisma db seed
 ```
 
-## Status MVP
+## Status Aplikasi
 
 Yang sudah ada:
 
@@ -109,10 +109,10 @@ Yang sudah ada:
 - Mitra/public: melihat etalase produk published dan detail produk.
 - Notifikasi: status pendaftaran, produk, pesan, absensi, dan progres masuk ke pusat notifikasi user.
 - Prisma schema untuk model data TOGAF/RPL.
-- Seed demo untuk database saat Neon tersedia.
+- Seed akun awal untuk database saat Neon tersedia.
 - Unit test untuk auth, credential, validasi form, dan RBAC.
 
 Catatan scope:
 
-- Upload gambar memakai URL demo; Vercel Blob disiapkan sebagai dependency tetapi belum dipakai di form upload.
+- Upload gambar memakai URL gambar terkurasi; Vercel Blob disiapkan sebagai dependency tetapi belum dipakai di form upload.
 - Export laporan tersedia sebagai CSV. Export PDF dapat ditambahkan setelah format laporan final ditentukan.

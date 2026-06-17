@@ -5,7 +5,7 @@ import { currentUser } from "@/lib/session";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Inklusi Karya Nusantara",
+  title: "Kreativa",
   description: "Platform pelatihan vokasional dan inkubasi usaha kreatif berbasis potensi lokal.",
 };
 

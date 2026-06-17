@@ -11,7 +11,7 @@ export async function GET() {
   const data = await getBackupData();
   return NextResponse.json(data, {
     headers: {
-      "Content-Disposition": `attachment; filename="backup-inklusi-karya.json"`,
+      "Content-Disposition": `attachment; filename="backup-kreativa.json"`,
     },
   });
 }

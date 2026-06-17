@@ -19,7 +19,7 @@ export default async function LoginPage({
     <section className="login-layout">
       <div className="login-intro-panel">
         <p className="eyebrow">Akses platform</p>
-        <h1>Masuk ke Inklusi Karya Nusantara</h1>
+        <h1>Masuk ke Kreativa</h1>
         <p>
           Gunakan akun yang telah diberikan oleh administrator untuk mengakses ruang kerja sesuai peran Anda.
           Setiap akun hanya dapat membuka modul yang sesuai dengan hak aksesnya.

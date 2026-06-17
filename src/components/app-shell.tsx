@@ -91,10 +91,10 @@ export function PublicShell({ children }: { children: ReactNode }) {
       <header className="public-topbar">
         <div className="public-topbar-inner">
           <Link className="brand-mark" href="/">
-            <span className="brand-icon">IK</span>
+            <span className="brand-icon">K</span>
             <span>
-              <strong>Inklusi Karya</strong>
-              <small>Nusantara</small>
+              <strong>Kreativa</strong>
+              <small>Platform Inklusif</small>
             </span>
           </Link>
           <nav aria-label="Navigasi utama" className="nav-links">
@@ -124,10 +124,10 @@ export function AppShell({ children, user }: { children: ReactNode; user: Sessio
       </a>
       <aside className="sidebar" aria-label="Navigasi aplikasi">
         <Link className="brand-mark sidebar-brand" href="/">
-          <span className="brand-icon">IK</span>
+          <span className="brand-icon">K</span>
           <span>
-            <strong>Inklusi Karya</strong>
-            <small>Nusantara</small>
+            <strong>Kreativa</strong>
+            <small>Platform Inklusif</small>
           </span>
         </Link>
         <div className="sidebar-section">

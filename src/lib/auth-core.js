@@ -1,6 +1,6 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-export const SESSION_COOKIE = "inklusikarya_session";
+export const SESSION_COOKIE = "kreativa_session";
 
 const VALID_ROLES = new Set(["ADMIN", "PARTICIPANT", "MENTOR", "PARTNER"]);
 
