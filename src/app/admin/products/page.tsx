@@ -1,4 +1,4 @@
-import { DataTable, PageHeader } from "@/components/dashboard";
+import { DataTable, PageHeader, getBadgeClass } from "@/components/dashboard";
 import { requireRole } from "@/lib/authorization";
 import { getAdminProducts } from "@/lib/data";
 import { deleteProductAction, updateProductStatusAction } from "./actions";
@@ -22,7 +22,7 @@ export default async function AdminProductsPage() {
           item.name,
           item.participant,
           item.category,
-          <span className="badge" key={`${item.id}-status`}>{item.status}</span>,
+          <span className={getBadgeClass(item.status)} key={`${item.id}-status`}>{item.status}</span>,
           <div className="inline-actions" key={item.id}>
             <form action={updateProductStatusAction}>
               <input type="hidden" name="productId" value={item.id} />

@@ -1,4 +1,4 @@
-import { DataTable, PageHeader } from "@/components/dashboard";
+import { DataTable, PageHeader, getBadgeClass } from "@/components/dashboard";
 import { requireRole } from "@/lib/authorization";
 import { getParticipantPrograms } from "@/lib/data";
 import { registerProgramAction } from "../actions";
@@ -24,7 +24,7 @@ export default async function ParticipantProgramsPage() {
           program.period,
           program.status,
           program.registrationStatus ? (
-            <span className="badge" key={`${program.id}-status`}>{program.registrationStatus}</span>
+            <span className={getBadgeClass(program.registrationStatus)} key={`${program.id}-status`}>{program.registrationStatus}</span>
           ) : (
             <form action={registerProgramAction} key={program.id}>
               <input type="hidden" name="programId" value={program.id} />

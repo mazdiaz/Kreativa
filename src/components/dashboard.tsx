@@ -132,8 +132,23 @@ export function SummaryPanel({
   );
 }
 
+export function getBadgeClass(status: string | number | null | undefined): string {
+  const s = String(status || "").toUpperCase();
+  if (["APPROVED", "SETUJU", "AKTIF", "PUBLISHED", "SUDAH DIBACA", "HADIR", "SELESAI", "OPEN", "ACTIVE"].some(term => s.includes(term))) {
+    return "badge badge-success";
+  }
+  if (["PENDING", "MENUNGGU", "IN_REVIEW", "SESI BIMBINGAN", "BELUM DIBACA", "ABSEN", "PROSES", "DRAFT"].some(term => s.includes(term))) {
+    return "badge badge-warning";
+  }
+  if (["REJECTED", "DITOLAK", "NEEDS_REVISION", "BATAL"].some(term => s.includes(term))) {
+    return "badge badge-danger";
+  }
+  return "badge";
+}
+
 export function StatusBadge({ children }: { children: React.ReactNode }) {
-  return <span className="badge">{children}</span>;
+  const text = typeof children === "string" ? children : "";
+  return <span className={getBadgeClass(text)}>{children}</span>;
 }
 
 export function EmptyState({ message = "Belum ada data." }: { message?: string }) {

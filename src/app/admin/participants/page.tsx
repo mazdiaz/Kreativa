@@ -1,4 +1,4 @@
-import { DataTable, PageHeader } from "@/components/dashboard";
+import { DataTable, PageHeader, getBadgeClass } from "@/components/dashboard";
 import { requireRole } from "@/lib/authorization";
 import { formatDate, getAdminParticipants, getAdminRegistrations } from "@/lib/data";
 import { createParticipantAction, deleteParticipantAction, updateParticipantAction, updateRegistrationStatusAction } from "./actions";
@@ -62,7 +62,7 @@ export default async function AdminParticipantsPage() {
           item.email,
           item.program,
           `${item.progress}%`,
-          <span className="badge" key={`${item.id}-status`}>{item.userStatus}</span>,
+          <span className={getBadgeClass(item.userStatus)} key={`${item.id}-status`}>{item.userStatus}</span>,
           <details key={item.id}>
             <summary>Ubah</summary>
             <form className="form-stack" action={updateParticipantAction}>
@@ -115,7 +115,7 @@ export default async function AdminParticipantsPage() {
           item.participant.user.name,
           item.program.name,
           formatDate(item.createdAt),
-          <span className="badge" key={`${item.id}-status`}>{item.status}</span>,
+          <span className={getBadgeClass(item.status)} key={`${item.id}-status`}>{item.status}</span>,
           <form className="inline-form" action={updateRegistrationStatusAction} key={item.id}>
             <input type="hidden" name="registrationId" value={item.id} />
             <select name="status" defaultValue={item.status} aria-label={`Status ${item.participant.user.name}`}>

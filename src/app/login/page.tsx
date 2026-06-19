@@ -17,51 +17,87 @@ export default async function LoginPage({
 
   return (
     <section className="login-layout">
+      {/* Left Column: Brand Intro Panel */}
       <div className="login-intro-panel">
-        <p className="eyebrow">Akses platform</p>
-        <h1>Masuk ke Kreativa</h1>
-        <p>
-          Gunakan akun yang telah diberikan oleh administrator untuk mengakses ruang kerja sesuai peran Anda.
-          Setiap akun hanya dapat membuka modul yang sesuai dengan hak aksesnya.
-        </p>
+        <div>
+          <p className="eyebrow" style={{ color: "#3b82f6" }}>Akses Portal</p>
+          <h1>Masuk ke Kreativa</h1>
+          <p>
+            Gunakan akun yang telah diberikan oleh administrator untuk mengakses ruang kerja sesuai peran Anda.
+            Setiap workspace didesain ramah pengguna dan mendukung aksesibilitas penuh.
+          </p>
+        </div>
+
         <div className="access-role-grid">
-          <h2>Area Akses</h2>
+          <h2>Hak Akses Peran</h2>
           <div className="access-role-card">
-            <strong>Admin</strong>
-            <span>Kelola peserta, program, user, produk, laporan, dan backup data.</span>
+            <strong>Admin Program</strong>
+            <span>Kelola peserta, validasi pendaftaran, kurasi produk, ekspor laporan, dan backup data.</span>
           </div>
           <div className="access-role-card">
-            <strong>Peserta</strong>
-            <span>Daftar program, isi asesmen, pantau progres, dan ajukan karya.</span>
+            <strong>Peserta Pelatihan</strong>
+            <span>Isi asesmen minat bakat, pelajari modul vokasional, dan ajukan produk hasil karya.</span>
           </div>
           <div className="access-role-card">
-            <strong>Mentor</strong>
-            <span>Catat mentoring, absensi, progres modul, dan tindak lanjut peserta.</span>
+            <strong>Mentor Pendamping</strong>
+            <span>Catat aktivitas bimbingan mentoring, update progres belajar, dan isi presensi absensi.</span>
           </div>
           <div className="access-role-card">
-            <strong>Mitra</strong>
-            <span>Lihat etalase produk peserta yang sudah dikurasi.</span>
+            <strong>Mitra Kerja</strong>
+            <span>Pantau etalase produk peserta yang siap dipasarkan secara komersial.</span>
           </div>
         </div>
       </div>
+
+      {/* Right Column: Auth Form */}
       <form className="login-card form-stack" action={loginAction}>
         <div>
-          <p className="eyebrow">Autentikasi</p>
-          <h2>Masuk</h2>
-          <p>Masukkan email dan kata sandi akun Anda.</p>
+          <p className="eyebrow">Autentikasi Pengguna</p>
+          <h2>Log In</h2>
+          <p>Masukkan email dan kata sandi akun Anda di bawah ini.</p>
         </div>
-        {params.error ? <div className="alert">Email atau password tidak valid.</div> : null}
+
+        {params.error ? (
+          <div className="alert" role="alert">
+            Email atau password yang Anda masukkan tidak valid. Silakan coba lagi.
+          </div>
+        ) : null}
+
         {params.next ? <input type="hidden" name="next" value={params.next} /> : null}
-        <div>
-          <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" required autoComplete="email" />
+
+        <div className="form-stack" style={{ gap: "0.75rem" }}>
+          <div>
+            <label htmlFor="email">Alamat Email</label>
+            <input 
+              id="email" 
+              name="email" 
+              type="email" 
+              required 
+              autoComplete="email" 
+              placeholder="nama@email.com"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password">Kata Sandi</label>
+            <input 
+              id="password" 
+              name="password" 
+              type="password" 
+              required 
+              autoComplete="current-password" 
+              placeholder="••••••••"
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input id="password" name="password" type="password" required autoComplete="current-password" />
-        </div>
-        <button type="submit">Masuk ke Dashboard</button>
-        <p className="login-help">Belum memiliki akses? Hubungi administrator program.</p>
+
+        <button type="submit" style={{ marginTop: "1rem" }}>
+          Masuk ke Dashboard
+        </button>
+
+        <p className="login-help">
+          Belum memiliki akses? Hubungi administrator program vokasional Kreativa.
+        </p>
       </form>
     </section>
   );

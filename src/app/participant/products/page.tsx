@@ -1,4 +1,4 @@
-import { DataTable, PageHeader } from "@/components/dashboard";
+import { DataTable, PageHeader, getBadgeClass } from "@/components/dashboard";
 import { requireRole } from "@/lib/authorization";
 import { getParticipantLearningData } from "@/lib/data";
 import { createProductAction, deleteProductAction, updateProductAction } from "../actions";
@@ -44,7 +44,7 @@ export default async function ParticipantProductsPage() {
         rows={products.map((item) => [
           item.name,
           item.category,
-          <span className="badge" key={`${item.id}-status`}>{item.status}</span>,
+          <span className={getBadgeClass(item.status)} key={`${item.id}-status`}>{item.status}</span>,
           <details key={item.id}>
             <summary>Ubah</summary>
             <form className="form-stack" action={updateProductAction}>

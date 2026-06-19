@@ -1,6 +1,6 @@
 import { Archive, ClipboardCheck, Inbox, PackageCheck, ShieldCheck, Users, BookOpen } from "lucide-react";
 
-import { ActionList, DataTable, InsightBanner, MiniBarChart, PageHeader, StatGrid, SummaryPanel, WorkflowList } from "@/components/dashboard";
+import { ActionList, DataTable, InsightBanner, MiniBarChart, PageHeader, StatGrid, SummaryPanel, WorkflowList, getBadgeClass } from "@/components/dashboard";
 import { requireRole } from "@/lib/authorization";
 import { getActivePrograms, getAdminParticipants, getDashboardStats } from "@/lib/data";
 
@@ -39,7 +39,7 @@ export default async function AdminDashboard() {
                 item.program,
                 item.disabilityNeed,
                 `${item.progress}%`,
-                <span className="badge" key={item.status}>{item.status}</span>,
+                <span className={getBadgeClass(item.status)} key={item.status}>{item.status}</span>,
               ])}
             />
           </section>

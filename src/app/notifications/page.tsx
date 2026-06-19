@@ -1,4 +1,4 @@
-import { DataTable, PageHeader } from "@/components/dashboard";
+import { DataTable, PageHeader, StatusBadge } from "@/components/dashboard";
 import { requireRole } from "@/lib/authorization";
 import { formatDate, getNotifications } from "@/lib/data";
 import { markAllNotificationsReadAction, markNotificationReadAction } from "./actions";
@@ -17,7 +17,7 @@ export default async function NotificationsPage() {
         description="Pantau perubahan status pendaftaran, produk, pesan, dan tindak lanjut operasional."
       />
       <form action={markAllNotificationsReadAction}>
-        <button className="secondary-button" type="submit">Tandai Semua Dibaca</button>
+        <button className="button secondary compact" type="submit">Tandai Semua Dibaca</button>
       </form>
       <div style={{ height: "1rem" }} />
       <DataTable
@@ -26,13 +26,15 @@ export default async function NotificationsPage() {
           item.title,
           item.body,
           formatDate(item.createdAt),
-          item.readAt ? "Sudah dibaca" : "Belum dibaca",
+          <StatusBadge key={`${item.id}-status`}>
+            {item.readAt ? "Sudah dibaca" : "Belum dibaca"}
+          </StatusBadge>,
           item.readAt ? (
             "-"
           ) : (
             <form action={markNotificationReadAction} key={item.id}>
               <input type="hidden" name="notificationId" value={item.id} />
-              <button type="submit">Tandai Dibaca</button>
+              <button className="button secondary compact" type="submit">Tandai Dibaca</button>
             </form>
           ),
         ])}

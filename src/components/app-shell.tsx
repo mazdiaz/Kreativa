@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect, type ReactNode } from "react";
 import {
   Archive,
   Bell,
@@ -22,9 +23,10 @@ import {
   ShoppingBag,
   Store,
   Users,
+  Sun,
+  Moon,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import type { ReactNode } from "react";
 
 import type { SessionUser } from "@/lib/session-types";
 
@@ -58,7 +60,7 @@ const roleNavigation: Record<SessionUser["role"], NavItem[]> = {
     { href: "/participant/assessment", label: "Asesmen", icon: ClipboardCheck },
     { href: "/participant/progress", label: "Progres", icon: CalendarCheck },
     { href: "/participant/business-ideas", label: "Ide Usaha", icon: Lightbulb },
-    { href: "/participant/products", label: "Produk", icon: ShoppingBag },
+    { href: "/participant/products", label: "Produk Saya", icon: ShoppingBag },
     { href: "/participant/inbox", label: "Inbox", icon: Inbox },
   ],
   MENTOR: [
@@ -75,6 +77,10 @@ const roleNavigation: Record<SessionUser["role"], NavItem[]> = {
 };
 
 function isActive(pathname: string, href: string) {
+  // If comparing the root dashboard route, enforce exact match to prevent sibling tabs from highlighting Dashboard
+  if (href === "/admin" || href === "/participant" || href === "/mentor" || href === "/partner") {
+    return pathname === href;
+  }
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -82,10 +88,45 @@ function currentPageLabel(items: NavItem[], pathname: string) {
   return [...items].sort((a, b) => b.href.length - a.href.length).find((item) => isActive(pathname, item.href))?.label ?? "Dashboard";
 }
 
+/* Custom Hook for Client-side Theme Toggle with Transition Suppression on Mount */
+function useTheme() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme") as "light" | "dark" | null;
+    if (saved) {
+      setTheme(saved);
+      document.documentElement.setAttribute("data-theme", saved);
+    } else {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const initial = prefersDark ? "dark" : "light";
+      setTheme(initial);
+      document.documentElement.setAttribute("data-theme", initial);
+    }
+    // Set mounted to true after a tiny delay to suppress initial layout-slide animations
+    const t = setTimeout(() => {
+      setMounted(true);
+    }, 40);
+    return () => clearTimeout(t);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "light" ? "dark" : "light";
+    setTheme(next);
+    localStorage.setItem("theme", next);
+    document.documentElement.setAttribute("data-theme", next);
+  };
+
+  return { theme, toggleTheme, mounted };
+}
+
 export function PublicShell({ children }: { children: ReactNode }) {
+  const { theme, toggleTheme, mounted } = useTheme();
+
   return (
     <>
-      <a className="skip-link button" href="#main">
+      <a className="skip-link" href="#main">
         Lewati ke konten utama
       </a>
       <header className="public-topbar">
@@ -99,6 +140,16 @@ export function PublicShell({ children }: { children: ReactNode }) {
           </Link>
           <nav aria-label="Navigasi utama" className="nav-links">
             <Link href="/showcase">Etalase</Link>
+            <button
+              className="theme-toggle-switch"
+              onClick={toggleTheme}
+              aria-label={`Ubah ke mode ${theme === "light" ? "gelap" : "terang"}`}
+              type="button"
+            >
+              <span className={`theme-toggle-slider ${theme} ${mounted ? "" : "no-transition"}`} />
+              <Sun className="theme-toggle-icon sun" size={14} />
+              <Moon className="theme-toggle-icon moon" size={14} />
+            </button>
             <Link className="button secondary compact" href="/login">
               Login
             </Link>
@@ -116,10 +167,11 @@ export function AppShell({ children, user }: { children: ReactNode; user: Sessio
   const pathname = usePathname();
   const items = roleNavigation[user.role];
   const pageLabel = currentPageLabel(items, pathname);
+  const { theme, toggleTheme, mounted } = useTheme();
 
   return (
     <div className="app-shell">
-      <a className="skip-link button" href="#main">
+      <a className="skip-link" href="#main">
         Lewati ke konten utama
       </a>
       <aside className="sidebar" aria-label="Navigasi aplikasi">
@@ -150,7 +202,7 @@ export function AppShell({ children, user }: { children: ReactNode; user: Sessio
             <Bell aria-hidden="true" size={18} />
             <span>Notifikasi</span>
           </a>
-          <a className="sidebar-link" href="/showcase">
+          <a className={isActive(pathname, "/showcase") ? "sidebar-link active" : "sidebar-link"} href="/showcase">
             <Boxes aria-hidden="true" size={18} />
             <span>Etalase Publik</span>
           </a>
@@ -162,7 +214,7 @@ export function AppShell({ children, user }: { children: ReactNode; user: Sessio
       </aside>
       <div className="app-main-wrap">
         <header className="app-topbar">
-          <div>
+          <div className="topbar-title-wrap">
             <p className="topbar-kicker">{roleLabels[user.role]}</p>
             <h2>{pageLabel}</h2>
             <span className="sync-status">Data tersinkron</span>
@@ -171,6 +223,16 @@ export function AppShell({ children, user }: { children: ReactNode; user: Sessio
             <button className="button secondary compact ghost-action" type="button" onClick={() => window.location.reload()} aria-label="Muat ulang halaman">
               <RefreshCw aria-hidden="true" size={15} />
               Muat ulang
+            </button>
+            <button
+              className="theme-toggle-switch"
+              onClick={toggleTheme}
+              aria-label={`Ubah ke mode ${theme === "light" ? "gelap" : "terang"}`}
+              type="button"
+            >
+              <span className={`theme-toggle-slider ${theme} ${mounted ? "" : "no-transition"}`} />
+              <Sun className="theme-toggle-icon sun" size={14} />
+              <Moon className="theme-toggle-icon moon" size={14} />
             </button>
             <a className="icon-button" href="/notifications" aria-label="Buka notifikasi">
               <Bell aria-hidden="true" size={18} />
