@@ -54,10 +54,10 @@ password123
 
 | Role | Email |
 |---|---|
-| Admin | admin@kreativa.test |
-| Peserta | peserta@kreativa.test |
-| Mentor | mentor@kreativa.test |
-| Mitra | mitra@kreativa.test |
+| Admin | admin@kreativa.com |
+| Peserta | peserta@kreativa.com |
+| Mentor | mentor@kreativa.com |
+| Mitra | mitra@kreativa.com |
 
 ## Environment Vercel
 

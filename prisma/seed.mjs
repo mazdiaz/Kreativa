@@ -4,10 +4,10 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const accounts = [
-  ["Admin Program", "admin@kreativa.test", "ADMIN"],
-  ["Siti Rahma", "peserta@kreativa.test", "PARTICIPANT"],
-  ["Budi Mentor", "mentor@kreativa.test", "MENTOR"],
-  ["Mitra Kreativa", "mitra@kreativa.test", "PARTNER"],
+  ["Admin Program", "admin@kreativa.com", "ADMIN"],
+  ["Siti Rahma", "peserta@kreativa.com", "PARTICIPANT"],
+  ["Budi Mentor", "mentor@kreativa.com", "MENTOR"],
+  ["Mitra Kreativa", "mitra@kreativa.com", "PARTNER"],
 ];
 
 async function main() {
@@ -20,7 +20,7 @@ async function main() {
     });
   }
 
-  const participantUser = await prisma.user.findUniqueOrThrow({ where: { email: "peserta@kreativa.test" } });
+  const participantUser = await prisma.user.findUniqueOrThrow({ where: { email: "peserta@kreativa.com" } });
   const participant = await prisma.participantProfile.upsert({
     where: { userId: participantUser.id },
     update: {},
