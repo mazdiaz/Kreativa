@@ -734,14 +734,22 @@ p {
   width: 22px;
 }
 
+.workflow-content {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
 .workflow-list strong {
   font-size: 0.9rem;
   color: var(--text);
+  line-height: 1.35;
 }
 
 .workflow-list span {
   font-size: 0.8rem;
   color: var(--text-muted);
+  line-height: 1.55;
 }
 
 /* Informative Top Insight Banners */

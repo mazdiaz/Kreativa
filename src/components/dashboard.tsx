@@ -75,8 +75,10 @@ export function WorkflowList({ items }: { items: Array<{ title: string; detail: 
       <ol className="workflow-list">
         {items.map((item) => (
           <li key={item.title}>
-            <strong>{item.title}</strong>
-            <span>{item.detail}</span>
+            <div className="workflow-content">
+              <strong>{item.title}</strong>
+              <span>{item.detail}</span>
+            </div>
           </li>
         ))}
       </ol>
