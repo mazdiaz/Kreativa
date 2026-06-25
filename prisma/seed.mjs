@@ -4,15 +4,23 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const accounts = [
-  ["Admin Program", "admin@kreativa.com", "ADMIN"],
-  ["Siti Rahma", "peserta@kreativa.com", "PARTICIPANT"],
-  ["Budi Mentor", "mentor@kreativa.com", "MENTOR"],
-  ["Mitra Kreativa", "mitra@kreativa.com", "PARTNER"],
+  { name: "Admin Program", email: "admin@kreativa.com", legacyEmail: "admin@kreativa.test", role: "ADMIN" },
+  { name: "Siti Rahma", email: "peserta@kreativa.com", legacyEmail: "peserta@kreativa.test", role: "PARTICIPANT" },
+  { name: "Budi Mentor", email: "mentor@kreativa.com", legacyEmail: "mentor@kreativa.test", role: "MENTOR" },
+  { name: "Mitra Kreativa", email: "mitra@kreativa.com", legacyEmail: "mitra@kreativa.test", role: "PARTNER" },
 ];
 
 async function main() {
   const passwordHash = await bcrypt.hash("password123", 10);
-  for (const [name, email, role] of accounts) {
+  for (const { name, email, legacyEmail, role } of accounts) {
+    const currentAccount = await prisma.user.findUnique({ where: { email } });
+    if (!currentAccount) {
+      await prisma.user.updateMany({
+        where: { email: legacyEmail },
+        data: { email },
+      });
+    }
+
     await prisma.user.upsert({
       where: { email },
       update: { name, role, passwordHash },
